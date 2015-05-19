@@ -1,4 +1,4 @@
-package victropolis;
+package com.victropolis;
 
 /**
  * Hello world!

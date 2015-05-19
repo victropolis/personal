@@ -1,4 +1,4 @@
-package victropolis;
+package com.victropolis;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
