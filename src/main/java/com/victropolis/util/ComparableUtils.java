@@ -7,6 +7,11 @@ import java.util.Comparator;
  */
 public class ComparableUtils
 {
+    public static boolean eq(Comparable a, Comparable b)
+    {
+        return a.compareTo(b) == 0;
+    }
+
     public static boolean lt(Comparable a, Comparable b)
     {
         return a.compareTo(b) < 0;
