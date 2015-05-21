@@ -1,13 +1,14 @@
 package com.victropolis.datastructures;
 
 import com.victropolis.util.ComparableUtils;
+import com.victropolis.util.sorting.impl.QuickSort;
 
 /**
  * Created by victropolis on 5/20/15.
  */
 public class BinarySearchTree<T extends Comparable<T>>
 {
-    private class Node<T>
+    protected class Node<T>
     {
         Node<T> parent;
         Node<T> leftChild;
@@ -79,11 +80,12 @@ public class BinarySearchTree<T extends Comparable<T>>
 
     private Node<T> rootNode;
 
-    private T[] bst;
-
-    public BinarySearchTree(T[] bst)
+    public BinarySearchTree(T[] items)
     {
-        this.bst = bst;
+        for (T item : items)
+        {
+            add(item);
+        }
     }
 
     public BinarySearchTree()
@@ -131,6 +133,11 @@ public class BinarySearchTree<T extends Comparable<T>>
 
     public void add(T soughtItem)
     {
+        if (soughtItem == null)
+        {
+            return;
+        }
+
         if (rootNode == null)
         {
             rootNode = new Node<T>(null, soughtItem);
