@@ -1,14 +1,13 @@
 package com.victropolis.datastructures;
 
 import com.victropolis.util.ComparableUtils;
-import com.victropolis.util.sorting.impl.QuickSort;
 
 /**
  * Created by victropolis on 5/20/15.
  */
 public class BinarySearchTree<T extends Comparable<T>>
 {
-    protected class Node<T>
+    private class Node<T extends Comparable<T>>
     {
         Node<T> parent;
         Node<T> leftChild;
@@ -16,69 +15,86 @@ public class BinarySearchTree<T extends Comparable<T>>
 
         T item;
 
-        public Node(T item)
+        Node(T item)
         {
             this.item = item;
         }
 
-        public Node(Node<T> parent, T item)
+        Node(Node<T> parent, T item)
         {
             this.parent = parent;
             this.item = item;
         }
 
-        public boolean hasLeft()
+        boolean isRoot()
         {
-            return getLeftChild() != null;
+            return parent == null;
+        }
+        
+        boolean isLeftChild()
+        {
+            return !isRoot() && parent.hasLeftChild() && ComparableUtils.eq(item, parent.leftChild.item);
+        }
+        
+        boolean isRightChild()
+        {
+            return !isRoot() && parent.hasRightChild() && ComparableUtils.eq(item, parent.rightChild.item);
+        }
+        
+        boolean hasLeftChild()
+        {
+            return leftChild != null;
         }
 
-        public boolean hasRight()
+        boolean hasRightChild()
         {
-            return getRightChild() != null;
+            return rightChild != null;
         }
 
-        public Node<T> getParent()
+        Node<T> getParent()
         {
             return parent;
         }
 
-        public void setParent(Node<T> parent)
+        void setParent(Node<T> parent)
         {
             this.parent = parent;
         }
 
-        public Node<T> getLeftChild()
+        Node<T> getLeftChild()
         {
             return leftChild;
         }
 
-        public void setLeftChild(Node<T> leftChild)
+        void setLeftChild(Node<T> leftChild)
         {
             this.leftChild = leftChild;
         }
 
-        public Node<T> getRightChild()
+        Node<T> getRightChild()
         {
             return rightChild;
         }
 
-        public void setRightChild(Node<T> rightChild)
+        void setRightChild(Node<T> rightChild)
         {
             this.rightChild = rightChild;
         }
 
-        public T getItem()
+        T getItem()
         {
             return item;
         }
 
-        public void setItem(T item)
+        void setItem(T item)
         {
             this.item = item;
         }
     }
 
     private Node<T> rootNode;
+//    private T min;
+//    private T max;
 
     public BinarySearchTree(T[] items)
     {
@@ -116,7 +132,7 @@ public class BinarySearchTree<T extends Comparable<T>>
     {
         Node<T> node = fromNode;
 
-        while (node.hasLeft())
+        while (node.hasLeftChild())
         {
             node = node.getLeftChild();
         }
@@ -128,7 +144,7 @@ public class BinarySearchTree<T extends Comparable<T>>
     {
         Node<T> node = fromNode;
 
-        while (node.hasRight())
+        while (node.hasRightChild())
         {
             node = node.getRightChild();
         }
@@ -142,21 +158,34 @@ public class BinarySearchTree<T extends Comparable<T>>
         return node != null ? node.getItem() : null;
     }
 
-    public void add(T soughtItem)
+    public void add(T item)
     {
-        if (soughtItem == null)
+        if (item == null)
         {
             return;
         }
 
         if (rootNode == null)
         {
-            rootNode = new Node<T>(null, soughtItem);
+            rootNode = new Node<T>(null, item);
         }
         else
         {
-            add(soughtItem, rootNode);
+            add(item, rootNode);
         }
+
+//        if (min == null && max == null)
+//        {
+//            min = max = item;
+//        }
+//        else if (ComparableUtils.lt(item, min))
+//        {
+//            min = item;
+//        }
+//        else if (ComparableUtils.gt(item, max))
+//        {
+//            max = item;
+//        }
     }
 
     private Node<T> find(T item, Node<T> node)
@@ -165,13 +194,13 @@ public class BinarySearchTree<T extends Comparable<T>>
         {
             T nodeItem;
 
-            for (nodeItem = node.getItem(); ((ComparableUtils.lt(item, nodeItem) && node.hasLeft()) || (ComparableUtils.gt(item, nodeItem) && node.hasRight())); nodeItem = node.getItem())
+            for (nodeItem = node.getItem(); ((ComparableUtils.lt(item, nodeItem) && node.hasLeftChild()) || (ComparableUtils.gt(item, nodeItem) && node.hasRightChild())); nodeItem = node.getItem())
             {
-                if (ComparableUtils.lt(item, nodeItem) && node.hasLeft())
+                if (ComparableUtils.lt(item, nodeItem) && node.hasLeftChild())
                 {
                     node = node.getLeftChild();
                 }
-                else if (ComparableUtils.gt(item, nodeItem) && node.hasRight())
+                else if (ComparableUtils.gt(item, nodeItem) && node.hasRightChild())
                 {
                     node = node.getRightChild();
                 }
@@ -190,13 +219,13 @@ public class BinarySearchTree<T extends Comparable<T>>
     {
         T nodeItem;
 
-        for (nodeItem = node.getItem(); (ComparableUtils.lt(item, nodeItem) && node.hasLeft()) || (ComparableUtils.gt(item, nodeItem) && node.hasRight()); nodeItem = node.getItem())
+        for (nodeItem = node.getItem(); (ComparableUtils.lt(item, nodeItem) && node.hasLeftChild()) || (ComparableUtils.gt(item, nodeItem) && node.hasRightChild()); nodeItem = node.getItem())
         {
-            if (ComparableUtils.lt(item, nodeItem) && node.hasLeft())
+            if (ComparableUtils.lt(item, nodeItem) && node.hasLeftChild())
             {
                 node = node.getLeftChild();
             }
-            else if (ComparableUtils.gt(item, nodeItem) && node.hasRight())
+            else if (ComparableUtils.gt(item, nodeItem) && node.hasRightChild())
             {
                 node = node.getRightChild();
             }
@@ -204,7 +233,7 @@ public class BinarySearchTree<T extends Comparable<T>>
 
         if (ComparableUtils.lt(item, nodeItem))
         {
-            if (node.hasLeft())
+            if (node.hasLeftChild())
             {
                 throw new IllegalStateException();
             }
@@ -215,7 +244,7 @@ public class BinarySearchTree<T extends Comparable<T>>
         }
         else if (ComparableUtils.gt(item, nodeItem))
         {
-            if (node.hasRight())
+            if (node.hasRightChild())
             {
                 throw new IllegalStateException();
             }
@@ -240,6 +269,19 @@ public class BinarySearchTree<T extends Comparable<T>>
         }
         else
         {
+//            if (node.isRoot())
+//            {
+//                min = max = null;
+//            }
+//            else if (node.isLeftChild() && ComparableUtils.eq(node.getItem(), min))
+//            {
+//                min = node.getParent().getItem();
+//            }
+//            else if (node.isRightChild() && ComparableUtils.eq(node.getItem(), max))
+//            {
+//                max = node.getParent().getItem();
+//            }
+
             T result = node.getItem();
 
             remove(node);
@@ -250,9 +292,9 @@ public class BinarySearchTree<T extends Comparable<T>>
 
     private void remove(Node<T> node)
     {
-        if (node.hasLeft() || node.hasRight())
+        if (node.hasLeftChild() || node.hasRightChild())
         {
-            Node<T> candidate = (node.hasRight() ? getMin(node.getRightChild()) : getMax(node.getLeftChild()));
+            Node<T> candidate = (node.hasRightChild() ? getMin(node.getRightChild()) : getMax(node.getLeftChild()));
             node.setItem(candidate.getItem());
             remove(candidate);
         }
@@ -262,11 +304,11 @@ public class BinarySearchTree<T extends Comparable<T>>
 
             if (parent != null)
             {
-                if (parent.hasLeft() && ComparableUtils.eq(node.getItem(), parent.getLeftChild().getItem()))
+                if (node.isLeftChild())
                 {
                     parent.setLeftChild(null);
                 }
-                else if (parent.hasRight() && ComparableUtils.eq(node.getItem(), parent.getRightChild().getItem()))
+                else if (node.isRightChild())
                 {
                     parent.setRightChild(null);
                 }
@@ -275,7 +317,7 @@ public class BinarySearchTree<T extends Comparable<T>>
             }
             else
             {
-                this.rootNode = null;
+                rootNode = null;
             }
         }
     }

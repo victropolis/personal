@@ -147,4 +147,73 @@ public class BinarySearchTreeTest
             Assert.assertNull(binarySearchTree.remove(integers[index]));
         }
     }
+
+    @Test
+    public void testMinAfterRemove()
+    {
+        Random random = new Random();
+
+        Map<Integer, Integer> set = new TreeMap<Integer, Integer>();
+        while (set.size() < 1000)
+        {
+            int i = Float.valueOf(random.nextFloat() * Integer.MAX_VALUE).intValue();
+            set.put(i, i);
+        }
+
+        List<Integer> integerList = new ArrayList<Integer>(set.size());
+
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : set.entrySet())
+        {
+            integerList.add(integerIntegerEntry.getKey());
+        }
+
+        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<Integer>();
+
+        while (integerList.size() > 0)
+        {
+            int index = Float.valueOf(random.nextFloat() * integerList.size()).intValue();
+            Integer item = integerList.get(index);
+            binarySearchTree.add(item);
+            integerList.remove(index);
+        }
+
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : set.entrySet())
+        {
+            integerList.add(integerIntegerEntry.getKey());
+        }
+
+        while (set.size() > 0)
+        {
+            int index = Math.max(Float.valueOf(random.nextFloat() * integerList.size()).intValue() - 1, 0);
+
+            Integer item = integerList.get(index);
+            binarySearchTree.remove(item);
+            integerList.remove(index);
+            set.remove(item);
+
+            Object[] entries = set.entrySet().toArray();
+
+            Integer min = ((Map.Entry<Integer, Integer>)entries[0]).getKey();
+            Integer max = ((Map.Entry<Integer, Integer>)entries[entries.length-1]).getKey();
+
+            Assert.assertEquals(min, binarySearchTree.getMin());
+            Assert.assertEquals(max, binarySearchTree.getMax());
+
+            set.remove(min);
+            set.remove(max);
+            binarySearchTree.remove(min);
+            binarySearchTree.remove(max);
+
+            if (set.size() > 0)
+            {
+                entries = set.entrySet().toArray();
+
+                min = ((Map.Entry<Integer, Integer>)entries[0]).getKey();
+                max = ((Map.Entry<Integer, Integer>)entries[entries.length-1]).getKey();
+
+                Assert.assertEquals(min, binarySearchTree.getMin());
+                Assert.assertEquals(max, binarySearchTree.getMax());
+            }
+        }
+    }
 }
