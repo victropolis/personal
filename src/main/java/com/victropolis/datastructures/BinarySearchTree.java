@@ -93,8 +93,6 @@ public class BinarySearchTree<T extends Comparable<T>>
     }
 
     private Node<T> rootNode;
-//    private T min;
-//    private T max;
 
     public BinarySearchTree(T[] items)
     {
@@ -173,19 +171,6 @@ public class BinarySearchTree<T extends Comparable<T>>
         {
             add(item, rootNode);
         }
-
-//        if (min == null && max == null)
-//        {
-//            min = max = item;
-//        }
-//        else if (ComparableUtils.lt(item, min))
-//        {
-//            min = item;
-//        }
-//        else if (ComparableUtils.gt(item, max))
-//        {
-//            max = item;
-//        }
     }
 
     private Node<T> find(T item, Node<T> node)
@@ -269,19 +254,6 @@ public class BinarySearchTree<T extends Comparable<T>>
         }
         else
         {
-//            if (node.isRoot())
-//            {
-//                min = max = null;
-//            }
-//            else if (node.isLeftChild() && ComparableUtils.eq(node.getItem(), min))
-//            {
-//                min = node.getParent().getItem();
-//            }
-//            else if (node.isRightChild() && ComparableUtils.eq(node.getItem(), max))
-//            {
-//                max = node.getParent().getItem();
-//            }
-
             T result = node.getItem();
 
             remove(node);
