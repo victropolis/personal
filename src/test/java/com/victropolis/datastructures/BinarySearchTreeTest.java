@@ -5,8 +5,7 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 /**
  * BinarySearchTree Tester.
@@ -39,7 +38,7 @@ public class BinarySearchTreeTest
         Integer[] integers = new Integer[1000000];
 
         int x;
-        for (x = 0; x < 1000000 - 9;)
+        for (x = 0; x < 1000000 - 2;)
         {
             integers[x++] = Float.valueOf(random.nextFloat() * Integer.MAX_VALUE).intValue();
         }
@@ -62,7 +61,7 @@ public class BinarySearchTreeTest
         Integer[] integers = new Integer[1000000];
 
         int x;
-        for (x = 0; x < 1000000 - 9;)
+        for (x = 0; x < 1000000 - 2;)
         {
             integers[x++] = Float.valueOf(random.nextFloat() * Integer.MAX_VALUE).intValue();
         }
@@ -117,7 +116,35 @@ public class BinarySearchTreeTest
     @Test
     public void testRemove() throws Exception
     {
-//TODO: Test goes here... 
-    }
+        Random random = new Random();
 
+        Set<Integer> set = new HashSet<Integer>();
+        while (set.size() < 1000000)
+        {
+            set.add(Float.valueOf(random.nextFloat() * Integer.MAX_VALUE).intValue());
+        }
+
+        Integer[] integers = new Integer[set.size()];
+
+        Iterator<Integer> iterator = set.iterator();
+
+        for (int x = 0; x < integers.length && iterator.hasNext(); x++)
+        {
+            integers[x] = iterator.next();
+        }
+
+        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<Integer>(integers);
+
+        for (int index = integers.length / 2; index < integers.length; index++)
+        {
+            Assert.assertEquals(integers[index], binarySearchTree.remove(integers[index]));
+            Assert.assertNull(binarySearchTree.remove(integers[index]));
+        }
+
+        for (int index = (integers.length / 2) - 1; index >= 0; index--)
+        {
+            Assert.assertEquals(integers[index], binarySearchTree.remove(integers[index]));
+            Assert.assertNull(binarySearchTree.remove(integers[index]));
+        }
+    }
 }
