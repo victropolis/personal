@@ -13,17 +13,17 @@ public class BinarySearchTree<T extends Comparable<T>>
         Node<T> leftChild;
         Node<T> rightChild;
 
-        T item;
+        T value;
 
-        Node(T item)
+        Node(T value)
         {
-            this.item = item;
+            this.value = value;
         }
 
-        Node(Node<T> parent, T item)
+        Node(Node<T> parent, T value)
         {
             this.parent = parent;
-            this.item = item;
+            this.value = value;
         }
 
         boolean isRoot()
@@ -33,12 +33,12 @@ public class BinarySearchTree<T extends Comparable<T>>
         
         boolean isLeftChild()
         {
-            return !isRoot() && parent.hasLeftChild() && ComparableUtils.eq(item, parent.leftChild.item);
+            return !isRoot() && parent.hasLeftChild() && ComparableUtils.eq(value, parent.leftChild.value);
         }
         
         boolean isRightChild()
         {
-            return !isRoot() && parent.hasRightChild() && ComparableUtils.eq(item, parent.rightChild.item);
+            return !isRoot() && parent.hasRightChild() && ComparableUtils.eq(value, parent.rightChild.value);
         }
         
         boolean hasLeftChild()
@@ -81,14 +81,14 @@ public class BinarySearchTree<T extends Comparable<T>>
             this.rightChild = rightChild;
         }
 
-        T getItem()
+        T getValue()
         {
-            return item;
+            return value;
         }
 
-        void setItem(T item)
+        void setValue(T value)
         {
-            this.item = item;
+            this.value = value;
         }
     }
 
@@ -108,174 +108,162 @@ public class BinarySearchTree<T extends Comparable<T>>
 
     public T getMax()
     {
-        if (this.rootNode == null)
+        if (rootNode == null)
         {
             return null;
         }
 
-        return getMax(this.rootNode).getItem();
+        return getMax(rootNode).getValue();
     }
 
     public T getMin()
     {
-        if (this.rootNode == null)
+        if (rootNode == null)
         {
             return null;
         }
 
-        return getMin(this.rootNode).getItem();
+        return getMin(rootNode).getValue();
     }
 
-    private Node<T> getMin(Node<T> fromNode)
+    private Node<T> getMin(Node<T> startingFrom)
     {
-        Node<T> node = fromNode;
+        Node<T> node;
 
-        while (node.hasLeftChild())
-        {
-            node = node.getLeftChild();
-        }
+        for (node = startingFrom; node.hasLeftChild(); node = node.getLeftChild());
 
         return node;
     }
 
-    private Node<T> getMax(Node<T> fromNode)
+    private Node<T> getMax(Node<T> startingFrom)
     {
-        Node<T> node = fromNode;
+        Node<T> node;
 
-        while (node.hasRightChild())
-        {
-            node = node.getRightChild();
-        }
+        for (node = startingFrom; node.hasRightChild(); node = node.getRightChild());
 
         return node;
     }
 
-    public T find(T soughtItem)
+    public T find(T soughtValue)
     {
-        Node<T> node = find(soughtItem, rootNode);
-        return node != null ? node.getItem() : null;
+        Node<T> node = find(soughtValue, rootNode);
+        return node == null ? null : node.getValue();
     }
 
-    public void add(T item)
+    public void add(T value)
     {
-        if (item == null)
+        if (value == null)
         {
             return;
         }
 
         if (rootNode == null)
         {
-            rootNode = new Node<T>(null, item);
+            rootNode = new Node<T>(null, value);
         }
         else
         {
-            add(item, rootNode);
+            add(value, rootNode);
         }
     }
 
-    private Node<T> find(T item, Node<T> node)
+    private Node<T> find(T soughtValue, Node<T> currentNode)
     {
-        if (node != null)
+        if (currentNode == null)
         {
-            T nodeItem;
+            return null;
+        }
 
-            for (nodeItem = node.getItem(); ((ComparableUtils.lt(item, nodeItem) && node.hasLeftChild()) || (ComparableUtils.gt(item, nodeItem) && node.hasRightChild())); nodeItem = node.getItem())
-            {
-                if (ComparableUtils.lt(item, nodeItem) && node.hasLeftChild())
-                {
-                    node = node.getLeftChild();
-                }
-                else if (ComparableUtils.gt(item, nodeItem) && node.hasRightChild())
-                {
-                    node = node.getRightChild();
-                }
-            }
+        T currentNodeValue;
 
-            if (ComparableUtils.eq(item, node.getItem()))
+        for (currentNodeValue = currentNode.getValue(); ((ComparableUtils.lt(soughtValue, currentNodeValue) && currentNode.hasLeftChild()) || (ComparableUtils.gt(soughtValue, currentNodeValue) && currentNode.hasRightChild())); currentNodeValue = currentNode.getValue())
+        {
+            if (ComparableUtils.lt(soughtValue, currentNodeValue) && currentNode.hasLeftChild())
             {
-                return node;
+                currentNode = currentNode.getLeftChild();
             }
+            else if (ComparableUtils.gt(soughtValue, currentNodeValue) && currentNode.hasRightChild())
+            {
+                currentNode = currentNode.getRightChild();
+            }
+        }
+
+        if (ComparableUtils.eq(soughtValue, currentNode.getValue()))
+        {
+            return currentNode;
         }
 
         return null;
     }
 
-    private void add(T item, Node<T> node)
+    private void add(T value, Node<T> currentNode)
     {
-        T nodeItem;
+        T currentNodeValue;
 
-        for (nodeItem = node.getItem(); (ComparableUtils.lt(item, nodeItem) && node.hasLeftChild()) || (ComparableUtils.gt(item, nodeItem) && node.hasRightChild()); nodeItem = node.getItem())
+        for (currentNodeValue = currentNode.getValue(); (ComparableUtils.lt(value, currentNodeValue) && currentNode.hasLeftChild()) || (ComparableUtils.gt(value, currentNodeValue) && currentNode.hasRightChild()); currentNodeValue = currentNode.getValue())
         {
-            if (ComparableUtils.lt(item, nodeItem) && node.hasLeftChild())
+            if (ComparableUtils.lt(value, currentNodeValue) && currentNode.hasLeftChild())
             {
-                node = node.getLeftChild();
+                currentNode = currentNode.getLeftChild();
             }
-            else if (ComparableUtils.gt(item, nodeItem) && node.hasRightChild())
+            else if (ComparableUtils.gt(value, currentNodeValue) && currentNode.hasRightChild())
             {
-                node = node.getRightChild();
+                currentNode = currentNode.getRightChild();
             }
         }
 
-        if (ComparableUtils.lt(item, nodeItem))
+        if (ComparableUtils.lt(value, currentNodeValue))
         {
-            if (node.hasLeftChild())
-            {
-                throw new IllegalStateException();
-            }
-            else
-            {
-                node.setLeftChild(new Node<T>(node, item));
-            }
+            assert !currentNode.hasLeftChild();
+
+            currentNode.setLeftChild(new Node<T>(currentNode, value));
         }
-        else if (ComparableUtils.gt(item, nodeItem))
+        else if (ComparableUtils.gt(value, currentNodeValue))
         {
-            if (node.hasRightChild())
-            {
-                throw new IllegalStateException();
-            }
-            else
-            {
-                node.setRightChild(new Node<T>(node, item));
-            }
+            assert !currentNode.hasRightChild();
+
+            currentNode.setRightChild(new Node<T>(currentNode, value));
         }
-        else if (ComparableUtils.eq(item, nodeItem))
+        else if (ComparableUtils.eq(value, currentNodeValue))
         {
-            node.setItem(item);
+            currentNode.setValue(value);
         }
     }
 
-    public T remove(T soughtItem)
+    public T remove(T value)
     {
-        Node<T> node = find(soughtItem, rootNode);
+        Node<T> node = find(value, rootNode);
 
         if (node == null)
         {
             return null;
         }
-        else
-        {
-            T result = node.getItem();
 
-            remove(node);
+        T result = node.getValue();
 
-            return result;
-        }
+        remove(node);
+
+        return result;
     }
 
     private void remove(Node<T> node)
     {
         if (node.hasLeftChild() || node.hasRightChild())
         {
-            Node<T> candidate = (node.hasRightChild() ? getMin(node.getRightChild()) : getMax(node.getLeftChild()));
-            node.setItem(candidate.getItem());
-            remove(candidate);
+            Node<T> valuePromotionCandidate = (node.hasRightChild() ? getMin(node.getRightChild()) : getMax(node.getLeftChild()));
+            node.setValue(valuePromotionCandidate.getValue());
+            remove(valuePromotionCandidate);
         }
         else
         {
-            Node<T> parent = node.getParent();
-
-            if (parent != null)
+            if (node.isRoot())
             {
+                rootNode = null;
+            }
+            else
+            {
+                Node<T> parent = node.getParent();
+
                 if (node.isLeftChild())
                 {
                     parent.setLeftChild(null);
@@ -286,10 +274,6 @@ public class BinarySearchTree<T extends Comparable<T>>
                 }
 
                 node.setParent(null);
-            }
-            else
-            {
-                rootNode = null;
             }
         }
     }
