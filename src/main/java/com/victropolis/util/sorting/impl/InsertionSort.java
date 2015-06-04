@@ -9,15 +9,15 @@ import java.util.Comparator;
 /**
  * Created by victropolis on 5/19/15.
  */
-public class InsertionSort extends AbstractSort
+public class InsertionSort<T extends Comparable<? super T>> extends AbstractSort<T>
 {
     @Override
-    protected void doSort(Comparable[] comparables, Comparator<Comparable> comparator)
+    protected void doSort(T[] comparables, Comparator<T> comparator)
     {
         insertionSort(comparables, comparator);
     }
 
-    private void insertionSort(Comparable[] array, Comparator<Comparable> comparator)
+    private void insertionSort(T[] array, Comparator<T> comparator)
     {
         for (int x = 1; x < array.length; x++)
         {

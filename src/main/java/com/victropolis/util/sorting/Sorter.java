@@ -5,9 +5,9 @@ import java.util.Comparator;
 /**
  * Created by victropolis on 5/19/15.
  */
-public interface Sorter
+public interface Sorter<T extends Comparable<? super T>>
 {
-    void sort(Comparable[] comparables);
+    void sort(T[] comparables);
 
-    void sort(Comparable[] comparables, Comparator<Comparable> comparator);
+    void sort(T[] comparables, Comparator<T> comparator);
 }

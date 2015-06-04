@@ -8,15 +8,15 @@ import java.util.Comparator;
 /**
  * Created by victropolis on 5/19/15.
  */
-public class SelectionSort extends AbstractSort
+public class SelectionSort<T extends Comparable<? super T>> extends AbstractSort<T>
 {
     @Override
-    protected void doSort(Comparable[] comparables, Comparator<Comparable> comparator)
+    protected void doSort(T[] comparables, Comparator<T> comparator)
     {
         selectionSort(comparables, comparator);
     }
 
-    private void selectionSort(Comparable[] array, Comparator<Comparable> comparator)
+    private void selectionSort(T[] array, Comparator<T> comparator)
     {
         for (int index = 0; index < array.length-1; index++)
         {
@@ -30,7 +30,7 @@ public class SelectionSort extends AbstractSort
                 }
             }
 
-            Comparable nextSmaller = array[nextSmallerIndex];
+            T nextSmaller = array[nextSmallerIndex];
             array[nextSmallerIndex] = array[index];
             array[index] = nextSmaller;
         }

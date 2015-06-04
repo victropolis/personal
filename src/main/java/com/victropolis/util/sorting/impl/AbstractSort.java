@@ -7,13 +7,13 @@ import java.util.Comparator;
 /**
  * Created by victropolis on 5/19/15.
  */
-public abstract class AbstractSort implements Sorter
+public abstract class AbstractSort<T extends Comparable<? super T>> implements Sorter<T>
 {
-    protected abstract void doSort(Comparable[] comparables, Comparator<Comparable> comparator);
+    protected abstract void doSort(T[] comparables, Comparator<T> comparator);
 
-    final public void sort(Comparable[] comparables)
+    final public void sort(T[] comparables)
     {
-        sort(comparables, new Comparator<Comparable>()
+        sort(comparables, new Comparator<T>()
         {
             public int compare(Comparable left, Comparable right)
             {
@@ -22,7 +22,7 @@ public abstract class AbstractSort implements Sorter
         });
     }
 
-    final public void sort(Comparable[] comparables, Comparator<Comparable> comparator)
+    final public void sort(T[] comparables, Comparator<T> comparator)
     {
         doSort(comparables, comparator);
     }

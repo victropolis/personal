@@ -9,15 +9,15 @@ import java.util.Comparator;
 /**
  * Created by victropolis on 5/19/15.
  */
-public class BubbleSort extends AbstractSort
+public class BubbleSort<T extends Comparable<? super T>> extends AbstractSort<T>
 {
     @Override
-    protected void doSort(Comparable[] comparables, Comparator<Comparable> comparator)
+    protected void doSort(T[] comparables, Comparator<T> comparator)
     {
         bubbleSort(comparables, comparator);
     }
 
-    private void bubbleSort(Comparable[] array, Comparator<Comparable> comparator)
+    private void bubbleSort(T[] array, Comparator<T> comparator)
     {
         int swaps;
 

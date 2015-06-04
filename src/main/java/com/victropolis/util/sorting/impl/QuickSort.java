@@ -2,22 +2,21 @@ package com.victropolis.util.sorting.impl;
 
 import com.victropolis.util.ArrayUtils;
 import com.victropolis.util.ComparableUtils;
-import com.victropolis.util.sorting.Sorter;
 
 import java.util.Comparator;
 
 /**
  * Created by victropolis on 5/19/15.
  */
-public class QuickSort extends AbstractSort
+public class QuickSort<T extends Comparable<? super T>> extends AbstractSort<T>
 {
     @Override
-    protected void doSort(Comparable[] comparables, Comparator<Comparable> comparator)
+    protected void doSort(T[] comparables, Comparator<T> comparator)
     {
         quickSort(comparables, comparator, 0, comparables.length - 1);
     }
 
-    private void quickSort(Comparable[] comparables, Comparator<Comparable> comparator, int left, int right)
+    private void quickSort(T[] comparables, Comparator<T> comparator, int left, int right)
     {
         int index = pivot(comparables, comparator, left, right);
 
@@ -33,7 +32,7 @@ public class QuickSort extends AbstractSort
 
     }
 
-    private static int pivot(Comparable[] comparables, Comparator<Comparable> comparator, int left, int right)
+    private int pivot(T[] comparables, Comparator<T> comparator, int left, int right)
     {
         int i = left, j = right;
 
