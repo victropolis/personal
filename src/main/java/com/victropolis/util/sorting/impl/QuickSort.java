@@ -8,15 +8,15 @@ import java.util.Comparator;
 /**
  * Created by victropolis on 5/19/15.
  */
-public class QuickSort<T extends Comparable<? super T>> extends AbstractSort<T>
+public class QuickSort<C extends Comparable<? super C>> extends AbstractSort<C>
 {
     @Override
-    protected void doSort(T[] comparables, Comparator<T> comparator)
+    protected void concreteSort(C[] comparables, Comparator<C> comparator)
     {
         quickSort(comparables, comparator, 0, comparables.length - 1);
     }
 
-    private void quickSort(T[] comparables, Comparator<T> comparator, int left, int right)
+    private void quickSort(C[] comparables, Comparator<C> comparator, int left, int right)
     {
         int index = pivot(comparables, comparator, left, right);
 
@@ -29,14 +29,13 @@ public class QuickSort<T extends Comparable<? super T>> extends AbstractSort<T>
         {
             quickSort(comparables, comparator, index, right);
         }
-
     }
 
-    private int pivot(T[] comparables, Comparator<T> comparator, int left, int right)
+    private int pivot(C[] comparables, Comparator<C> comparator, int left, int right)
     {
         int i = left, j = right;
 
-        Comparable pivot = comparables[(left + right) / 2];
+        C pivot = comparables[(left + right) / 2];
 
         while (i <= j)
         {

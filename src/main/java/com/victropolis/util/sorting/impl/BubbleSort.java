@@ -2,22 +2,21 @@ package com.victropolis.util.sorting.impl;
 
 import com.victropolis.util.ArrayUtils;
 import com.victropolis.util.ComparableUtils;
-import com.victropolis.util.sorting.Sorter;
 
 import java.util.Comparator;
 
 /**
  * Created by victropolis on 5/19/15.
  */
-public class BubbleSort<T extends Comparable<? super T>> extends AbstractSort<T>
+public class BubbleSort<C extends Comparable<? super C>> extends AbstractSort<C>
 {
     @Override
-    protected void doSort(T[] comparables, Comparator<T> comparator)
+    protected void concreteSort(C[] comparables, Comparator<C> comparator)
     {
         bubbleSort(comparables, comparator);
     }
 
-    private void bubbleSort(T[] array, Comparator<T> comparator)
+    private void bubbleSort(C[] array, Comparator<C> comparator)
     {
         int swaps;
 

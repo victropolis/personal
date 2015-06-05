@@ -1,4 +1,4 @@
-package com.victropolis.datastructures;
+package com.victropolis.datastructures.impl;
 
 /**
  * Created by victropolis on 5/19/15.

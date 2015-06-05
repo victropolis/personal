@@ -10,7 +10,7 @@ import java.util.Comparator;
 public class MergeSort<T extends Comparable<? super T>> extends AbstractSort<T>
 {
     @Override
-    protected void doSort(T[] Ts, Comparator<T> comparator)
+    protected void concreteSort(T[] Ts, Comparator<T> comparator)
     {
         mergeSort(Ts, comparator);
     }

@@ -7,52 +7,52 @@ import java.util.Comparator;
  */
 public class ComparableUtils
 {
-    public static boolean neq(Comparable a, Comparable b)
+    public static <C extends Comparable<? super C>> boolean neq(C a, C b)
     {
         return a.compareTo(b) != 0;
     }
 
-    public static boolean eq(Comparable a, Comparable b)
+    public static <C extends Comparable<? super C>> boolean eq(C a, C b)
     {
         return a.compareTo(b) == 0;
     }
 
-    public static boolean lt(Comparable a, Comparable b)
+    public static <C extends Comparable<? super C>> boolean lt(C a, C b)
     {
         return a.compareTo(b) < 0;
     }
 
-    public static boolean gt(Comparable a, Comparable b)
+    public static <C extends Comparable<? super C>> boolean gt(C a, C b)
     {
         return a.compareTo(b) > 0;
     }
 
-    public static boolean lte(Comparable a, Comparable b)
+    public static <C extends Comparable<? super C>> boolean lte(C a, C b)
     {
         return a.compareTo(b) <= 0;
     }
 
-    public static boolean gte(Comparable a, Comparable b)
+    public static <C extends Comparable<? super C>> boolean gte(C a, C b)
     {
         return a.compareTo(b) >= 0;
     }
 
-    public static boolean lt(Comparable a, Comparable b, Comparator comparator)
+    public static <C extends Comparable<? super C>> boolean lt(C a, C b, Comparator<C> comparator)
     {
         return comparator.compare(a, b) < 0;
     }
 
-    public static boolean gt(Comparable a, Comparable b, Comparator comparator)
+    public static <C extends Comparable<? super C>> boolean gt(C a, C b, Comparator<C> comparator)
     {
         return comparator.compare(a, b) > 0;
     }
 
-    public static boolean lte(Comparable a, Comparable b, Comparator comparator)
+    public static <C extends Comparable<? super C>> boolean lte(C a, C b, Comparator<C> comparator)
     {
         return comparator.compare(a, b) <= 0;
     }
 
-    public static boolean gte(Comparable a, Comparable b, Comparator comparator)
+    public static <C extends Comparable<? super C>> boolean gte(C a, C b, Comparator<C> comparator)
     {
         return comparator.compare(a, b) >= 0;
     }
