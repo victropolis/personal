@@ -1,4 +1,4 @@
-package com.victropolis.util.sorting.impl;
+package com.victropolis.algorithms.sorting.impl;
 
 import com.victropolis.util.ArrayUtils;
 import com.victropolis.util.ComparableUtils;
@@ -18,12 +18,10 @@ public class BubbleSort<C extends Comparable<? super C>> extends AbstractSort<C>
 
     private void bubbleSort(C[] array, Comparator<C> comparator)
     {
-        int swaps;
+        int swaps = 0;
 
-        for (int x = array.length; x >= 0; x--)
+        for (int x = array.length; x >= 0; x--, swaps=0)
         {
-            swaps = 0;
-
             for (int y = 0; y < array.length - 1; y++)
             {
                 if (ComparableUtils.gt(array[y], array[y + 1], comparator))

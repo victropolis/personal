@@ -1,21 +1,21 @@
-package com.victropolis.util.sorting.impl;
+package com.victropolis.algorithms.sorting.impl;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
 
 import java.util.Comparator;
 import java.util.Random;
 
 /**
- * InsertionSort Tester.
+ * MergeSort Tester.
  *
  * @author <Authors name>
  * @version 1.0
  * @since <pre>May 19, 2015</pre>
  */
-public class InsertionSortTest
+public class MergeSortTest
 {
 
     @Before
@@ -34,14 +34,14 @@ public class InsertionSortTest
     @Test
     public void testSortComparables() throws Exception
     {
-        Integer[] array = new Integer[10000];
+        Integer[] array = new Integer[500000];
         Random random = new Random();
         for (int x = 0; x < array.length; x++)
         {
             array[x] = (int) (random.nextFloat() * Integer.MAX_VALUE);
         }
 
-        new InsertionSort().sort(array);
+        new MergeSort().sort(array);
 
         for (int x = 1; x < array.length; x++)
         {
@@ -55,14 +55,14 @@ public class InsertionSortTest
     @Test
     public void testSortForComparablesAscending() throws Exception
     {
-        Integer[] array = new Integer[10000];
+        Integer[] array = new Integer[500000];
         Random random = new Random();
         for (int x = 0; x < array.length; x++)
         {
             array[x] = (int) (random.nextFloat() * Integer.MAX_VALUE);
         }
 
-        new InsertionSort().sort(array);
+        new MergeSort().sort(array);
 
         for (int x = 1; x < array.length; x++)
         {
@@ -76,14 +76,14 @@ public class InsertionSortTest
     @Test
     public void testSortForComparablesDescending() throws Exception
     {
-        Integer[] array = new Integer[10000];
+        Integer[] array = new Integer[500000];
         Random random = new Random();
         for (int x = 0; x < array.length; x++)
         {
             array[x] = (int) (random.nextFloat() * Integer.MAX_VALUE);
         }
 
-        new InsertionSort().sort(array, new Comparator<Comparable>()
+        new MergeSort().sort(array, new Comparator<Comparable>()
         {
             public int compare(Comparable left, Comparable right)
             {

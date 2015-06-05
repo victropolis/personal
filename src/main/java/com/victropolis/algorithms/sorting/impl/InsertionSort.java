@@ -1,4 +1,4 @@
-package com.victropolis.util.sorting.impl;
+package com.victropolis.algorithms.sorting.impl;
 
 import com.victropolis.util.ArrayUtils;
 import com.victropolis.util.ComparableUtils;

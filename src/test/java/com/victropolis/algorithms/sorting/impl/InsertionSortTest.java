@@ -1,4 +1,4 @@
-package com.victropolis.util.sorting.impl;
+package com.victropolis.algorithms.sorting.impl;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -9,13 +9,13 @@ import java.util.Comparator;
 import java.util.Random;
 
 /**
- * BubbleSort Tester.
+ * InsertionSort Tester.
  *
  * @author <Authors name>
  * @version 1.0
  * @since <pre>May 19, 2015</pre>
  */
-public class BubbleSortTest
+public class InsertionSortTest
 {
 
     @Before
@@ -41,7 +41,7 @@ public class BubbleSortTest
             array[x] = (int) (random.nextFloat() * Integer.MAX_VALUE);
         }
 
-        new BubbleSort().sort(array);
+        new InsertionSort().sort(array);
 
         for (int x = 1; x < array.length; x++)
         {
@@ -62,7 +62,7 @@ public class BubbleSortTest
             array[x] = (int) (random.nextFloat() * Integer.MAX_VALUE);
         }
 
-        new BubbleSort().sort(array);
+        new InsertionSort().sort(array);
 
         for (int x = 1; x < array.length; x++)
         {
@@ -83,7 +83,7 @@ public class BubbleSortTest
             array[x] = (int) (random.nextFloat() * Integer.MAX_VALUE);
         }
 
-        new BubbleSort().sort(array, new Comparator<Comparable>()
+        new InsertionSort().sort(array, new Comparator<Comparable>()
         {
             public int compare(Comparable left, Comparable right)
             {

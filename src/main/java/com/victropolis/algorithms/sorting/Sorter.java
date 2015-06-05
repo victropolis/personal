@@ -1,4 +1,4 @@
-package com.victropolis.util.sorting;
+package com.victropolis.algorithms.sorting;
 
 import java.util.Comparator;
 
