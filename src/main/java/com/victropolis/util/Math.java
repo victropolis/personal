@@ -96,4 +96,17 @@ public class Math {
     public static double multiplyWithoutMultiplying3(double left, double right) {
         return java.lang.Math.pow(10, java.lang.Math.log10(left) + java.lang.Math.log10(right));
     }
+
+    public static void printPrimeNumbers(int max) {
+        for (int x = 1; x < max; x++) {
+            boolean stillPrime = true;
+
+            for (int y = 2; stillPrime && y < x; stillPrime = (x % y != 0), y++);
+
+            if (stillPrime)
+            {
+                System.out.println(x++);
+            }
+        }
+    }
 }
