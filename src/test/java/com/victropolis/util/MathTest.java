@@ -104,4 +104,9 @@ public class MathTest {
             Assert.assertEquals(left * right, Math.multiplyWithoutMultiplying3(left, right), 0.1f);
         }
     }
+
+    @Test
+    public void testPrintPrime() throws Exception {
+        Math.printPrimeNumbers(100000);
+    }
 }
