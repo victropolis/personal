@@ -99,14 +99,28 @@ public class Math {
 
     public static void printPrimeNumbers(int max) {
         for (int x = 1; x < max; x++) {
-            boolean stillPrime = true;
-
-            for (int y = 2; stillPrime && y < x; stillPrime = (x % y != 0), y++);
-
-            if (stillPrime)
+            if (isPrime(x))
             {
                 System.out.println(x++);
             }
         }
+    }
+
+    private static boolean isPrime(long number) {
+        boolean isPrime = true;
+
+        if (number == 1) {
+            isPrime = false;
+        }
+        else {
+            for (int x = 2; x*x <= number; x++) {
+                if (number % x == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+
+        return isPrime;
     }
 }
