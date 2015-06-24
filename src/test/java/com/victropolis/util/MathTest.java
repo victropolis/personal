@@ -105,7 +105,7 @@ public class MathTest {
         }
     }
 
-    @Test
+//    @Test
     public void testPrintPrime() throws Exception {
         Math.printPrimeNumbers(100000);
     }
