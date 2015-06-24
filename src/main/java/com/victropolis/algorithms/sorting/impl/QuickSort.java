@@ -33,28 +33,26 @@ public class QuickSort<C extends Comparable<? super C>> extends AbstractSort<C>
 
     private int pivot(C[] comparables, Comparator<C> comparator, int left, int right)
     {
-        int i = left, j = right;
-
         C pivot = comparables[(left + right) / 2];
 
-        while (i <= j)
+        while (left <= right)
         {
-            while (ComparableUtils.lt(comparables[i], pivot, comparator))
+            while (ComparableUtils.lt(comparables[left], pivot, comparator))
             {
-                i++;
+                left++;
             }
 
-            while (ComparableUtils.gt(comparables[j], pivot, comparator))
+            while (ComparableUtils.gt(comparables[right], pivot, comparator))
             {
-                j--;
+                right--;
             }
 
-            if (i <= j)
+            if (left <= right)
             {
-                ArrayUtils.swap(comparables, i++, j--);
+                ArrayUtils.swap(comparables, left++, right--);
             }
         }
 
-        return i;
+        return left;
     }
 }

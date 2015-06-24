@@ -16,15 +16,15 @@ public class InsertionSort<C extends Comparable<? super C>> extends AbstractSort
         insertionSort(comparables, comparator);
     }
 
-    private void insertionSort(C[] array, Comparator<C> comparator)
+    private void insertionSort(C[] comparables, Comparator<C> comparator)
     {
-        for (int x = 1; x < array.length; x++)
+        for (int x = 1; x < comparables.length; x++)
         {
             for (int y = x; y > 0; y--)
             {
-                if (ComparableUtils.gt(array[y-1], array[y], comparator))
+                if (ComparableUtils.gt(comparables[y-1], comparables[y], comparator))
                 {
-                    ArrayUtils.swap(array, y-1, y);
+                    ArrayUtils.swap(comparables, y-1, y);
                 }
             }
         }

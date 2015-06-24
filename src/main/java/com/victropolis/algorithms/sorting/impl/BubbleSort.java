@@ -16,17 +16,17 @@ public class BubbleSort<C extends Comparable<? super C>> extends AbstractSort<C>
         bubbleSort(comparables, comparator);
     }
 
-    private void bubbleSort(C[] array, Comparator<C> comparator)
+    private void bubbleSort(C[] comparables, Comparator<C> comparator)
     {
         int swaps = 0;
 
-        for (int x = array.length; x >= 0; x--, swaps=0)
+        for (int x = comparables.length; x >= 0; x--, swaps=0)
         {
-            for (int y = 0; y < array.length - 1; y++)
+            for (int y = 0; y < comparables.length - 1; y++)
             {
-                if (ComparableUtils.gt(array[y], array[y + 1], comparator))
+                if (ComparableUtils.gt(comparables[y], comparables[y + 1], comparator))
                 {
-                    ArrayUtils.swap(array, y, y + 1);
+                    ArrayUtils.swap(comparables, y, y + 1);
                     swaps++;
                 }
             }
